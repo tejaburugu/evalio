@@ -17,7 +17,7 @@
 
 ## 📸 Preview
 
-![Evalio Screenshot](./assets/screenshot.png) <!-- Replace with a real screenshot later -->
+![Evalio Screenshot](https://github.com/tejaburugu/evalio/blob/main/assets/Screenshot.png) <!-- Replace with a real screenshot later -->
 
 ---
 
