@@ -65,3 +65,56 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+/* === Ensure Monaco Editor renders full-height === */
+/* html,
+body,
+#root {
+  height: 100%;
+}
+
+.flex-1,
+.h-full,
+.monaco-container {
+  height: 100%;
+  min-height: 100%;
+}
+
+.monaco-editor, .overflow-guard {
+  height: 100% !important;
+} */
+/* === Ensure Monaco Editor renders full height and inside layout === */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.h-screen,
+.h-full,
+.flex-1,
+.editor-container,
+.monaco-container {
+  height: 100%;
+  min-height: 100%;
+}
+
+.monaco-editor,
+.overflow-guard {
+  height: 100% !important;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-container {
+  position: relative;
+  background: #1e1e1e;
+}
+
+

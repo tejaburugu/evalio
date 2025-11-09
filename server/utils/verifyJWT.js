@@ -1,19 +1,26 @@
-const jwt = require("jsonwebtoken");
 
-function verifyJWT(req, res, next) {
-  const token = req.headers["authorization"];
+// module.exports = verifyJWT;
+import jwt from "jsonwebtoken";
 
-  if (!token) {
-    return res.status(403).json({ message: "Token missing" });
+/**
+ * Middleware to verify JWT tokens
+ */
+export default function verifyJWT(req, res, next) {
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+
+  // Expecting "Bearer <token>"
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Missing or invalid authorization header" });
   }
 
-  try {
-    const decoded = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
-    req.user = decoded;
+  const token = authHeader.split(" ")[1];
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid or expired token" });
+    }
+
+    req.user = decoded; // attach decoded token payload to request
     next();
-  } catch (err) {
-    return res.status(401).json({ message: "Invalid token" });
-  }
+  });
 }
-
-module.exports = verifyJWT;
